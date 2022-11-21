@@ -1,14 +1,12 @@
 defmodule Birthday.Logic do
   def calculate_age(birthday) do
-    #get env variable
     age_data_type = System.get_env("data_type_response")
     array_date = convert_date_to_array(birthday)
     converted_date = convert_to_date(array_date)
     current_date = Date.utc_today()
     days_passed = Date.diff(current_date, converted_date)
     years_old = days_passed * (1 / 365)
-    result = years_old |> trunc
-    result |> transform_data_type(age_data_type)
+    years_old |> trunc |> transform_data_type(age_data_type)
   end
 
   defp transform_data_type(data, data_type) when data_type == "string" do to_string(data) end
