@@ -16,8 +16,16 @@ defmodule Birthday.Router do
 
   get "/age/:birthday" do
     result = Birthday.Logic.calculate_age(birthday)
-    data = %{ age: result }
-    render_json(conn, data)
+    render_json(conn, %{ age: result })
+  end
+
+  post "/aggregator" do
+    tasks = conn.body_params["tasks"]
+    {:ok, pid} = Aggregator.start_link()
+    Aggregator.convert_to_string(pid, tasks)
+    list_converted = Aggregator.return_list(pid)
+    Aggregator.stop(pid)
+    render_json(conn, %{tasks: list_converted})
   end
 
   match _ do

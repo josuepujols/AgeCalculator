@@ -9,8 +9,9 @@ defmodule Birthday.Logic do
     years_old |> trunc |> transform_data_type(age_data_type)
   end
 
-  defp transform_data_type(data, data_type) when data_type == "string" do to_string(data) end
-  defp transform_data_type(data, data_type) when data_type == "int" do data end
+  defp transform_data_type(data, "string"), do: to_string(data)
+  defp transform_data_type(data, "int"), do: data
+  defp transform_data_type(data, _), do: data
 
   defp convert_to_date(array_date) do
     year = String.to_integer(Enum.at(array_date, 2))
@@ -21,6 +22,6 @@ defmodule Birthday.Logic do
   end
 
   defp convert_date_to_array(date) do
-      date |>  String.split("-")
+      date |> String.split("-")
   end
 end
