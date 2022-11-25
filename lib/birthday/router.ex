@@ -21,10 +21,8 @@ defmodule Birthday.Router do
 
   post "/aggregator" do
     tasks = conn.body_params["tasks"]
-    {:ok, pid} = Aggregator.start_link()
-    Aggregator.convert_to_string(pid, tasks)
-    list_converted = Aggregator.return_list(pid)
-    Aggregator.stop(pid)
+    Aggregator.convert_to_string(:aggregator, tasks)
+    list_converted = Aggregator.return_list(:aggregator)
     render_json(conn, %{tasks: list_converted})
   end
 

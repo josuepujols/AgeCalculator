@@ -11,7 +11,8 @@ defmodule Birthday.Application do
     children = [
       # Starts a worker by calling: Birthday.Worker.start_link(arg)
       # {Birthday.Worker, arg}
-      {Plug.Cowboy, scheme: :http, plug: Birthday.Router, options: [port: 8000]}
+      {Plug.Cowboy, scheme: :http, plug: Birthday.Router, options: [port: 8000]},
+      {Aggregator, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

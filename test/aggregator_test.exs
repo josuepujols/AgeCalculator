@@ -4,8 +4,8 @@ defmodule AggregatorTest do
 
   test "convert_to_string/2 and return_list/1" do
     #data test
+    pid = :aggregator
     tasks = [10, 9, 8, 7, 6]
-    {:ok, pid}  = Aggregator.start_link()
     #act
     is_converted = Aggregator.convert_to_string(pid, tasks)
     list_converted = Enum.map(Aggregator.return_list(pid), fn item -> String.to_integer(item) end)
